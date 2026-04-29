@@ -1,0 +1,162 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 100%; height: 100%;
+  background: #111;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  overflow: hidden;
+}
+.cr-root {
+  position: relative;
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+  background-color: #111;
+  background-image: radial-gradient(circle, #2a2a2a 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.cr-stage {
+  position: absolute; inset: 0; width: 300%; height: 100%;
+  display: flex; transform: translateX(-33.333%); will-change: transform;
+}
+.cr-stage.sliding-left { transition: transform 0.65s cubic-bezier(0.77,0,0.18,1); }
+.cr-stage.sliding-right { transition: transform 0.65s cubic-bezier(0.77,0,0.18,1); }
+.cr-panel {
+  position: relative; width: 33.333%; height: 100%; flex-shrink: 0; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  padding: 0 5vw;
+}
+.cr-img-wrap {
+  position: absolute; 
+  left: 0;
+  right: 0;
+  top: 50%; 
+  transform: translateY(-50%); /* Centraliza verticalmente na tela */
+  
+  width: 100%; /* Ocupa de ponta a ponta horizontalmente */
+  height: 75vh; /* Define a altura do retângulo (ajuste este valor para mais ou menos) */
+  
+  /* Se você preferir uma proporção fixa de vídeo, use aspect-ratio em vez de height.
+     Exemplo: aspect-ratio: 21 / 9; */
+  
+  border-radius: 0; /* Remove as bordas arredondadas para parecer um corte seco */
+  overflow: hidden; 
+  z-index: 1; /* Mantém atrás do .cr-main que tem z-index 10 */
+}
+.cr-img-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center top;
+  opacity: 0; transition: opacity 1.4s ease;
+}
+.cr-img-bg.active { opacity: 1; }
+.cr-img-shadow {
+  position: absolute; 
+  inset: 0;
+  /* Gradiente da esquerda (escuro) para a direita (transparente) e um pouco no fundo */
+  background: linear-gradient(90deg, 
+    rgba(17,17,17,1) 0%, 
+    rgba(17,17,17,0.7) 30%, 
+    rgba(17,17,17,0) 70%),
+    linear-gradient(0deg, rgba(17,17,17,0.8) 0%, transparent 40%);
+  z-index: 2;
+}
+.cr-main {
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column; gap: 14px; max-width: 420px;
+}
+.cr-logo-wrap {
+  opacity: 0; transform: translateX(-20px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.cr-logo-wrap.visible { opacity: 1; transform: translateX(0); }
+.cr-logo-text {
+  font-size: clamp(67px, 2.8vw, 32px);
+  font-weight: 900; letter-spacing: -0.5px; line-height: 1.1;
+  color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.9); text-transform: uppercase;
+}
+.cr-meta {
+  display: flex; align-items: center; gap: 8px;
+  opacity: 0; transform: translateX(-16px);
+  transition: opacity 0.6s ease 0.10s, transform 0.6s ease 0.10s;
+}
+.cr-meta.visible { opacity: 1; transform: translateX(0); }
+.cr-rating {
+  background: #f47521; color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 2px 6px; border-radius: 2px; letter-spacing: 0.3px;
+}
+.cr-dot-sep { width: 4px; height: 4px; border-radius: 50%; background: #aaa; flex-shrink: 0; }
+.cr-genres { color: #ccc; font-size: 12px; }
+.cr-desc {
+  color: #ddd; font-size: 13px; line-height: 1.5; max-width: 340px;
+  opacity: 0; transform: translateX(-14px);
+  transition: opacity 0.6s ease 0.18s, transform 0.6s ease 0.18s;
+}
+.cr-desc.visible { opacity: 1; transform: translateX(0); }
+.cr-buttons {
+  display: flex; gap: 8px; align-items: center;
+  opacity: 0; transform: translateX(-12px);
+  transition: opacity 0.6s ease 0.26s, transform 0.6s ease 0.26s;
+}
+.cr-buttons.visible { opacity: 1; transform: translateX(0); }
+.cr-btn-play {
+  display: flex; align-items: center; gap: 7px;
+  background: #fff; color: #000; border: none; border-radius: 3px;
+  padding: 9px 20px; font-size: 11px; font-weight: 700;
+  cursor: pointer; letter-spacing: 0.5px; white-space: nowrap;
+  font-family: 'Helvetica Neue', Arial, sans-serif; text-transform: uppercase;
+  transition: background 0.18s, transform 0.12s;
+}
+.cr-btn-play:hover { background: #e8e8e8; transform: scale(1.02); }
+.cr-btn-play:active { transform: scale(0.98); }
+.cr-btn-save {
+  width: 38px; height: 38px;
+  border: 2px solid rgba(255,255,255,0.5); background: transparent;
+  border-radius: 3px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.18s, background 0.18s, transform 0.12s;
+}
+.cr-btn-save:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: scale(1.05); }
+.cr-btn-save svg { width: 15px; height: 15px; fill: #fff; }
+.cr-ui-layer {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: center; padding-bottom: 20px;
+}
+.cr-dots { display: flex; align-items: center; gap: 22px; }
+.cr-dot-btn {
+  width: 28px; height: 28px; border: none; background: transparent;
+  cursor: pointer; padding: 0; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.cr-star {
+  width: 22px; height: 22px; display: block;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.cr-dot-btn .cr-star path { fill: #666; transition: fill 0.25s ease; }
+.cr-dot-btn:hover .cr-star path { fill: #aaa; }
+.cr-dot-btn.active .cr-star path { fill: #ffffff; }
+.cr-dot-btn.clicked .cr-star { transform: scale(1.4); }
+.cr-dot-btn::after {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%);
+  opacity: 0; transform: scale(0); pointer-events: none;
+}
+.cr-dot-btn.clicked::after { animation: shimmerPulse 0.45s ease-out forwards; }
+@keyframes shimmerPulse {
+  0%   { opacity: 0.8; transform: scale(0.3); }
+  60%  { opacity: 0.3; transform: scale(1.5); }
+  100% { opacity: 0;   transform: scale(2); }
+}
+.cr-progress {
+  position: absolute; bottom: 0; left: 0;
+  height: 3px; width: 0%;
+  background: #f47521; z-index: 101; border-radius: 0 2px 2px 0;
+}
+.cr-particles { position: absolute; inset: 0; pointer-events: none; z-index: 200; overflow: hidden; }
+.cr-top-label {
+  position: absolute; top: 28px; left: 5vw; z-index: 10;
+  color: #fff; font-size: 15px; font-weight: 600;
+}
+@media (max-width: 768px) {
+  .cr-img-wrap { width: 100%; right: 0; top: auto; bottom: 0; transform: none; aspect-ratio: 16/9; border-radius: 0; }
+  .cr-main { max-width: 90%; }
+  .cr-panel { padding: 5vh 6vw 10vh; }
+}

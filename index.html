@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnimeWish</title>
+  <meta name="theme-color" content="#111111" />
+  <link rel="icon" href="./imagens/estrela.png" type="image/png" />
+  <!-- Preload das imagens do primeiro anime para carregamento instantâneo -->
+  <link rel="preload" as="image" href="./imagens/wallhaven-ex7qp8.jpeg" fetchpriority="high" />
+  <link rel="preload" as="image" href="./imagens/naruto.avif" fetchpriority="high" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="cr-root" id="crRoot">
+    <div class="cr-top-label">Vamos assistir ou comprar algo do seu anime favorito!</div>
+
+    <!-- BARRA DE BUSCA + CARRINHO -->
+    <div class="cr-top-right" id="topRight">
+      <div class="cr-search-wrap" id="searchWrap">
+        <div class="cr-search-box" id="searchBox">
+          <input class="cr-search-input" id="searchInput" type="text" placeholder="Buscar anime..." autocomplete="off" />
+          <button class="cr-search-clear" id="searchClear" aria-label="Limpar">×</button>
+        </div>
+        <button class="cr-search-toggle" id="searchToggle" aria-label="Buscar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+        <div class="cr-search-results" id="searchResults"></div>
+      </div>
+
+      <!-- CARRINHO -->
+      <div class="cr-cart-wrap" id="cartWrap">
+        <button class="cr-cart-toggle" id="cartToggle" aria-label="Loja">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </button>
+        <div class="cr-cart-submenu" id="cartSubmenu">
+          <a class="cr-cart-sub-btn" id="cartBtnManga" href="#" target="_blank" data-tooltip="Mangás" style="--delay:0.04s">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          </a>
+          <a class="cr-cart-sub-btn" id="cartBtnFigures" href="#" target="_blank" data-tooltip="Figures" style="--delay:0.09s">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v6"/><path d="M9 10h6"/><path d="M9 22l3-6 3 6"/></svg>
+          </a>
+          <a class="cr-cart-sub-btn" id="cartBtnRoupas" href="#" target="_blank" data-tooltip="Roupas" style="--delay:0.14s">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+          </a>
+          <a class="cr-cart-sub-btn" id="cartBtnMusicas" href="#" target="_blank" data-tooltip="Músicas" style="--delay:0.19s">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="cr-card-wrap">
+    <div class="cr-stage" id="crStage">
+
+      <!-- PAINEL C -->
+      <div class="cr-panel" id="panelC">
+        <div class="cr-img-wrap" id="imgWrapC"><div class="cr-img-shadow"></div></div>
+        <div class="cr-main">
+          <div class="cr-logo-wrap" id="logoWrapC">
+            <img class="cr-logo-img" id="logoImgC" src="" alt="" />
+          </div>
+          <div class="cr-meta" id="metaWrapC">
+            <span class="cr-rating" id="ratingC"></span>
+            <span class="cr-dot-sep"></span>
+            <span class="cr-genres" id="genresC"></span>
+          </div>
+          <div class="cr-desc" id="descC"></div>
+          <div class="cr-buttons" id="btnsC">
+            <a class="cr-btn-play" id="btnPlayC" href="#" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span id="playLabelC">COMEÇAR A ASSISTIR E1</span>
+            </a>
+            <a class="cr-btn-save" id="btnSaveC" href="#" title="Ler Manga" target="_blank">
+              <img src="./imagens/icone-salvar.png" alt="Manga" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAINEL A -->
+      <div class="cr-panel" id="panelA">
+        <div class="cr-img-wrap" id="imgWrapA"><div class="cr-img-shadow"></div></div>
+        <div class="cr-main">
+          <div class="cr-logo-wrap" id="logoWrapA">
+            <img class="cr-logo-img" id="logoImgA" src="" alt="" />
+          </div>
+          <div class="cr-meta" id="metaWrapA">
+            <span class="cr-rating" id="ratingA"></span>
+            <span class="cr-dot-sep"></span>
+            <span class="cr-genres" id="genresA"></span>
+          </div>
+          <div class="cr-desc" id="descA"></div>
+          <div class="cr-buttons" id="btnsA">
+            <a class="cr-btn-play" id="btnPlayA" href="#" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span id="playLabelA">COMEÇAR A ASSISTIR E1</span>
+            </a>
+            <a class="cr-btn-save" id="btnSaveA" href="#" title="Ler Manga" target="_blank">
+              <img src="./imagens/icone-salvar.png" alt="Manga" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAINEL B -->
+      <div class="cr-panel" id="panelB">
+        <div class="cr-img-wrap" id="imgWrapB"><div class="cr-img-shadow"></div></div>
+        <div class="cr-main">
+          <div class="cr-logo-wrap" id="logoWrapB">
+            <img class="cr-logo-img" id="logoImgB" src="" alt="" />
+          </div>
+          <div class="cr-meta" id="metaWrapB">
+            <span class="cr-rating" id="ratingB"></span>
+            <span class="cr-dot-sep"></span>
+            <span class="cr-genres" id="genresB"></span>
+          </div>
+          <div class="cr-desc" id="descB"></div>
+          <div class="cr-buttons" id="btnsB">
+            <a class="cr-btn-play" id="btnPlayB" href="#" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span id="playLabelB">COMEÇAR A ASSISTIR E1</span>
+            </a>
+            <a class="cr-btn-save" id="btnSaveB" href="#" title="Ler Manga" target="_blank">
+              <img src="./imagens/icone-salvar.png" alt="Manga" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="cr-progress" id="progressBar"></div>
+    </div><!-- /cr-card-wrap -->
+    <div class="cr-ui-layer"><div class="cr-dots-nav" id="dotsNav"><button class="cr-dots-arrow cr-dots-arrow-left" id="dotsArrowLeft" aria-label="Anterior"><img src="./imagens/seta.png" alt="" /></button><div class="cr-dots" id="dotsWrap"></div><button class="cr-dots-arrow cr-dots-arrow-right" id="dotsArrowRight" aria-label="Próxima"><img src="./imagens/seta.png" alt="" /></button></div></div>
+    <div class="cr-particles" id="particlesContainer"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
